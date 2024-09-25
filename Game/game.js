@@ -42,6 +42,8 @@ class Game{
         
          this.board.markCell(cellNo , currentSymbol);
 
+         this.board.displayBoard();
+
          this.turn++;
 
         if (this.turn >= 5) {

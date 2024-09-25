@@ -45,6 +45,17 @@ class Board{
         }
     }
 
+    displayBoard(){
+            
+            console.log(`
+                 ${this.cells[0].getSymbol() || ' '} | ${this.cells[1].getSymbol() || ' '} | ${this.cells[2].getSymbol() || ' '}
+                -----------
+                 ${this.cells[3].getSymbol() || ' '} | ${this.cells[4].getSymbol() || ' '} | ${this.cells[5].getSymbol() || ' '}
+                -----------
+                 ${this.cells[6].getSymbol() || ' '} | ${this.cells[7].getSymbol() || ' '} | ${this.cells[8].getSymbol() || ' '}
+                `);
+    }
+
     checkResult() {
         // rows
         if (this.cells[0].getSymbol() === this.cells[1].getSymbol() && this.cells[0].getSymbol() === this.cells[2].getSymbol() && this.cells[0].getSymbol() !== " ") {
