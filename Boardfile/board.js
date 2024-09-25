@@ -56,38 +56,37 @@ class Board{
                 `);
     }
 
-    checkResult() {
-        // rows
-        if (this.cells[0].getSymbol() === this.cells[1].getSymbol() && this.cells[0].getSymbol() === this.cells[2].getSymbol() && this.cells[0].getSymbol() !== " ") {
-            return true;
-        }
-        if (this.cells[3].getSymbol() === this.cells[4].getSymbol() && this.cells[3].getSymbol() === this.cells[5].getSymbol() && this.cells[3].getSymbol() !== " ") {
-            return true;
-        }
-        if (this.cells[6].getSymbol() === this.cells[7].getSymbol() && this.cells[6].getSymbol() === this.cells[8].getSymbol() && this.cells[6].getSymbol() !== " ") {
-            return true;
-        }
+   
 
-        // columns
-        if (this.cells[0].getSymbol() === this.cells[3].getSymbol() && this.cells[0].getSymbol() === this.cells[6].getSymbol() && this.cells[0].getSymbol() !== " ") {
-            return true;
-        }
-        if (this.cells[1].getSymbol() === this.cells[4].getSymbol() && this.cells[1].getSymbol() === this.cells[7].getSymbol() && this.cells[1].getSymbol() !== " ") {
-            return true;
-        }
-        if (this.cells[2].getSymbol() === this.cells[5].getSymbol() && this.cells[2].getSymbol() === this.cells[8].getSymbol() && this.cells[2].getSymbol() !== " ") {
-            return true;
-        }
+    checkResult(){
+        try {
+            const patterns = [
+                0, 1, 2,   
+                3, 4, 5,   
+                6, 7, 8,   
+                0, 3, 6, 
+                1, 4, 7,
+                2, 5, 8,  
+                0, 4, 8, 
+                2, 4, 6   
+            ];
 
-        // diagonals
-        if (this.cells[0].getSymbol() === this.cells[4].getSymbol() && this.cells[0].getSymbol() === this.cells[8].getSymbol() && this.cells[0].getSymbol() !== " ") {
-            return true;
-        }
-        if (this.cells[2].getSymbol() === this.cells[4].getSymbol() && this.cells[2].getSymbol() === this.cells[6].getSymbol() && this.cells[2].getSymbol() !== " ") {
-            return true;
-        }
+            for(let i =0; i<patterns.length; i += 3){
+                let a = patterns[i];
+                let b = patterns[i+1];
+                let c = patterns[i+2];
 
-        return false;
+                if(this.cells[a].getSymbol() === this.cells[b].getSymbol() && this.cells[b].getSymbol() === this.cells[c].getSymbol() && this.cells[a].getSymbol() !== " "){
+                    return true;
+                }
+
+            }
+
+            return false;
+
+        } catch (error) {
+            throw error;
+        }
     }
 
 }
