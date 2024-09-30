@@ -1,10 +1,14 @@
 const Board =  require("../Boardfile/board.js");
 const Player  = require("../Playerfile/player.js");
 class Game{
-    constructor(board , players , turn){
+   
+    constructor(board , players , turn , isActive , winner , draw){
         this.board = board;
         this.players = players;
         this.turn = turn;
+        this.isActive = isActive;
+        this.winner = winner;
+        this.draw = draw;
     }
 
 
@@ -23,7 +27,7 @@ class Game{
 
         let players = [p1 , p2];
 
-        return new Game(newBoard , players , 0);
+        return new Game(newBoard , players , 0 , true , null , false);
 
         
        } catch (error) {
@@ -32,10 +36,34 @@ class Game{
 
     }
 
+    isActiveGame(){
+        if(!this.isActive){
+            if(this.draw == true){
+                console.log("It's a draw!");
+                return;
+            }
+
+            if(this.winner !== null){
+                
+                console.log(`Player ${this.winner.getName()} wins!`);
+                return;
+            }
+
+        
+        }
+
+        return true;
+    }
+
     play(cellNo){
        try {
+
          this.board.validateCellNo(cellNo);
          this.board.isCellEmpty(cellNo);
+         if(!this.isActiveGame()){
+            return;
+         }
+
 
          let currentPlayer = this.players[this.turn % 2];
          let currentSymbol = currentPlayer.getSymbol();
@@ -49,13 +77,18 @@ class Game{
         if (this.turn >= 5) {
             
             if (this.board.checkResult()) {
+                  
                     console.log(`Player ${currentPlayer.getName()} wins!`);
+                    this.isActive = false;
+                    this.winner = currentPlayer;
                     return;
                 }
             }
 
-            if (this.turn === 9) {
+            if (this.turn === 8) {
                 console.log("It's a draw!");
+                this.draw = true;
+                this.isActive = false;
                 return;
         }
          
